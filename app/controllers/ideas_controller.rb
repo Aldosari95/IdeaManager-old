@@ -3,7 +3,18 @@ class IdeasController < ApplicationController
   before_action :authenticate, only: [:new, :create, :edit, :update, :destroy, :show]
 
   def index
-    @ideas = Idea.all
+    @platforms = Platform.all
+    if params[:order] == "asc"
+      @ideas = Idea.all.order(name: :asc)
+    elsif params[:order] == "desc"
+      @ideas = Idea.all.order(name: :desc)
+    elsif params[:order] == "oldest"
+      @ideas = Idea.all.order(created_at: :asc)
+    else
+      @ideas = Idea.all.order(created_at: :desc)
+    end
+
+    @ideas = @ideas.where(platform_id: params[:platform_id]) if params[:platform_id]
   end
 
   def show

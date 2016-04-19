@@ -2,10 +2,22 @@
 
 <h1>Listing Ideas</h1>
 
+Platform:
+<%= link_to "All", ideas_path(platform_id: nil) %>,
+<%- @platforms.each do |platform| %>
+  <%= link_to platform.name, ideas_path(platform_id: platform.id) %>,
+<% end %>
+
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>
+        Name
+        <%= link_to "ASC", ideas_path(order: 'asc') %>
+        <%= link_to "DESC", ideas_path(order: 'desc') %>
+        <%= link_to "NEWEST", ideas_path(order: 'newest') %>
+        <%= link_to "OLDEST", ideas_path(order: 'oldest') %>
+      </th>
       <th>Description</th>
       <th>Required skills</th>
       <th>Additional info</th>

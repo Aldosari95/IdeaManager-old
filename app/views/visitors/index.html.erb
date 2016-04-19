@@ -2,10 +2,22 @@
 
 <h3>Welcome</h3>
 
+Platform:
+<%= link_to "All", root_path(platform_id: nil) %>,
+<%- @platforms.each do |platform| %>
+  <%= link_to platform.name, root_path(platform_id: platform.id) %>,
+<% end %>
+
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>
+        Name
+        <%= link_to "ASC", root_path(order: 'asc') %>
+        <%= link_to "DESC", root_path(order: 'desc') %>
+        <%= link_to "NEWEST", root_path(order: 'newest') %>
+        <%= link_to "OLDEST", root_path(order: 'oldest') %>
+      </th>
       <th>Platform</th>
       <th>Owner</th>
       <th>Designer</th>
