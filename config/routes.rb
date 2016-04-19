@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :roles
-  resources :ideas
+  resources :platforms
+  resources :ideas do
+    put :respond, on: :member
+  end
   root to: 'visitors#index'
 
   get 'signup' => 'users#new'

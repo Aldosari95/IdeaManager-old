@@ -1,7 +1,6 @@
 class IdeasController < ApplicationController
-  before_action :set_idea, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, only: [:new, :create, :edit, :update, :destroy]
-
+  before_action :set_idea, only: [:show, :edit, :update, :destroy, :respond]
+  before_action :authenticate, only: [:new, :create, :edit, :update, :destroy, :show]
 
   def index
     @ideas = Idea.all
@@ -31,6 +30,18 @@ class IdeasController < ApplicationController
     end
   end
 
+  def respond
+    user_ids = @idea.user_ids
+    respond_to do |format|
+      if @idea.update(user_ids: user_ids << current_user.id)
+        format.html { redirect_to @idea, notice: ' Respond to an application idea successfully.' }
+        format.json { render :show, status: :ok, location: @idea }
+      else
+        format.html { render :show }
+        format.json { render json: @idea.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def update
     respond_to do |format|
@@ -59,7 +70,7 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name, :description, :required_skills, :additional_info, :platform_id)
+      params.require(:idea).permit(:name, :description, :required_skills, :additional_info, :platform_id, :user_id)
     end
 
 

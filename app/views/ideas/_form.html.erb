@@ -7,6 +7,7 @@
     <%= f.input :required_skills %>
     <%= f.input :additional_info %>
     <%= f.association :platform, as: :radio_buttons%>
+    <%= f.hidden_field :user_id, value: current_user.id %>
   </div>
 
   <div class="form-actions">

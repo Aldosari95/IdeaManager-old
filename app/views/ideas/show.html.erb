@@ -25,5 +25,16 @@
   <%= @idea.platform.try(:name) %>
 </p>
 
+
+<% if !@idea.user_already_respond?(current_user.id) && !current_user.is_owner?(@idea.user_id)%>
+  <%= simple_form_for(@idea, url: respond_idea_path, method: :put) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-actions">
+      <%= f.button :submit, "Respond" %>
+    </div>
+  <% end %>
+<% end %>
+
+
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>

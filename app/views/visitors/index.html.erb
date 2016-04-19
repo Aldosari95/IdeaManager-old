@@ -18,9 +18,9 @@
       <tr>
         <td><%= idea.name %></td>
         <td><%= idea.platform.try(:name) %></td>
-        <td><%= %></td>
-        <td><%= %></td>
-        <td><%= %></td>
+        <td><%= idea.user.try(:name) %></td>
+        <td><%= idea.arr_name_designer %></td>
+        <td><%= idea.arr_name_developer %></td>
       </tr>
     <% end %>
   </tbody>

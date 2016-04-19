@@ -6,6 +6,7 @@ class CreateIdeas < ActiveRecord::Migration
       t.string :required_skills
       t.string :additional_info
       t.integer :platform_id
+      t.integer :user_id
 
       t.timestamps null: false
     end

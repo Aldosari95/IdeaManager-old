@@ -3,10 +3,11 @@
 #
 # Examples:
 #
-r = Role.create(name: "Designer")
-  Role.create(name: "Developer")
-  User.create(name: "Tartan", email: "tartan@cmu.edu", password: "foobar", admin: true, role_id: r.id)
+Role.create(name: "Designer")
+Role.create(name: "Developer")
 
-  Platform.create(name: "Web App")
-  Platform.create(name: "iPhone App")
-  Platform.create(name: "Android App")
+User.create(name: "Tartan", email: "tartan@cmu.edu", password: "foobar", admin: true, role_id: Role.first.id)
+
+Platform.create(name: "Web App")
+Platform.create(name: "iPhone App")
+Platform.create(name: "Android App")
