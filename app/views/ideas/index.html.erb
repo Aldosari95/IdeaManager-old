@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ideas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Required skills</th>
+      <th>Additional info</th>
+      <th>Platform</th>
+    </tr>
+  </thead>
+
+  <tbody>
+ <% @ideas.each do |idea| %>
+      <tr>
+        <td><%= idea.name %></td>
+        <td><%= idea.description %></td>
+        <td><%= idea.required_skills %></td>
+        <td><%= idea.additional_info %></td>
+        <td><%= idea.platform.try(:name) %></td>
+        <td><%= link_to 'Show', idea %></td>
+        <td><%= link_to 'Edit', edit_idea_path(idea)
+    %></td>
+        <td><%= link_to 'Destroy', idea, method: :delete,
+    data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+<% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New idea', new_idea_path %>
+
+

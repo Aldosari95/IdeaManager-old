@@ -1,0 +1,8 @@
+<%# add navigation links to this file %>
+<li><%= link_to 'Ideas', ideas_path %></li>
+<li><%= link_to 'About', page_path('about') %></li>
+<%if logged_in? && current_user.admin? %>
+  <li><%= link_to 'Roles', roles_path %></li>
+  <li><%= link_to 'Users', users_path %></li>
+<% end %>
+
