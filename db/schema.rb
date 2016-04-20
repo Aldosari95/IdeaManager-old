@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20160418184341) do
     t.string   "required_skills"
     t.string   "additional_info"
     t.integer  "platform_id"
-    t.integer  "user_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -27,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160418184341) do
   create_table "ideas_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "idea_id"
+    t.integer "action_type"
   end
 
   add_index "ideas_users", ["idea_id"], name: "index_ideas_users_on_idea_id"
@@ -47,11 +47,11 @@ ActiveRecord::Schema.define(version: 20160418184341) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "password"
+    t.string   "password_digest"
     t.integer  "role_id"
-    t.boolean  "admin",      default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.boolean  "admin",           default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
 end

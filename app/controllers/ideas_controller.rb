@@ -28,10 +28,11 @@ class IdeasController < ApplicationController
   end
 
   def create
-    @idea = Idea.new(idea_params)
+    @idea = current_user.ideas.create(idea_params)
+    @idea.ideas_users.first.update(action_type: IdeasUser.action_types[:owner])
 
     respond_to do |format|
-      if @idea.save
+      if @idea.errors.blank?
         format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
         format.json { render :show, status: :created, location: @idea }
       else
@@ -43,6 +44,7 @@ class IdeasController < ApplicationController
 
   def respond
     user_ids = @idea.user_ids
+
     respond_to do |format|
       if @idea.update(user_ids: user_ids << current_user.id)
         format.html { redirect_to @idea, notice: ' Respond to an application idea successfully.' }
@@ -81,7 +83,7 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name, :description, :required_skills, :additional_info, :platform_id, :user_id)
+      params.require(:idea).permit(:name, :description, :required_skills, :additional_info, :platform_id)
     end
 
 
