@@ -26,7 +26,7 @@
 </p>
 
 
-<% if !@idea.user_already_respond?(current_user.id) && !current_user.is_owner?(@idea.user_id)%>
+<% if !@idea.user_already_respond?(current_user.id) %>
   <%= simple_form_for(@idea, url: respond_idea_path, method: :put) do |f| %>
     <%= f.error_notification %>
     <div class="form-actions">
