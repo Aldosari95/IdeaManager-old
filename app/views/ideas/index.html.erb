@@ -34,7 +34,7 @@ Platform:
         <td><%= idea.additional_info %></td>
         <td><%= idea.platform.try(:name) %></td>
         <td><%= link_to 'Show', idea %></td>
-        <% if current_user && (current_user.is_owner?(idea.owner.id) || current_user.admin) %>
+        <% if current_user && (current_user.is_owner?(idea.owner.try(:id)) || current_user.admin) %>
           <td><%= link_to 'Edit', edit_idea_path(idea)
       %></td>
           <td><%= link_to 'Destroy', idea, method: :delete,

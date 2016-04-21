@@ -18,7 +18,7 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.role.name %></td>
+        <td><%= user.try(:role).try(:name) %></td>
         <td><%= user.admin %></td>
         <td><%= link_to 'Toggle Admin',
             make_admin_user_path(user) %></td>

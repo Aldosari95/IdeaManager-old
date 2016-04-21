@@ -30,7 +30,7 @@ Platform:
       <tr>
         <td><%= idea.name %></td>
         <td><%= idea.platform.try(:name) %></td>
-        <td><%= idea.owner.try(:name) %></td>
+        <td><%= idea.try(:owner).try(:name) %></td>
         <td><%= idea.arr_name_respond_designer %></td>
         <td><%= idea.arr_name_respond_developer %></td>
       </tr>

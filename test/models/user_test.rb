@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
 
 	def setup
 		Role.create(name: "Developer")
-		@user = User.new(name: "tartan", email: "tartan@cmu.edu", password: "foobar12", password_confirmation: "foobar12", role_id: Role.first.id)
+		@user = User.new(name: "tartan", email: "tartan1@cmu.edu", password: "foobar12", password_confirmation: "foobar12", role_id: Role.first.id)
 	end
 
 	test "should be valid" do
@@ -27,7 +27,8 @@ class UserTest < ActiveSupport::TestCase
 	end
 
 	test "email should not be too long" do
-		@user.email = "a" * 244 + "@cmu.edu"
+		@user.email = "a" * 255 + "@cmu.edu"
+		assert_not @user.valid?
 	end
 
 	test "email validation should accept valid addresses" do

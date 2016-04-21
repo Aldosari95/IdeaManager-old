@@ -21,7 +21,7 @@ class Idea < ActiveRecord::Base
   end
 
   def owner
-    self.ideas_users.owner.first.user
+    self.ideas_users.owner.try(:first).try(:user)
   end
 end
 
