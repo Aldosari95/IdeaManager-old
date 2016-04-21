@@ -20,8 +20,9 @@ Platform:
       </th>
       <th>Platform</th>
       <th>Owner</th>
-      <th>Designer</th>
-      <th>Developer</th>
+      <% @roles.each do |role| %>
+        <th><%= role.name.capitalize %></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -31,8 +32,9 @@ Platform:
         <td><%= idea.name %></td>
         <td><%= idea.platform.try(:name) %></td>
         <td><%= idea.try(:owner).try(:name) %></td>
-        <td><%= idea.arr_name_respond_designer %></td>
-        <td><%= idea.arr_name_respond_developer %></td>
+        <% @roles.each do |role| %>
+          <td><%= idea.arr_name_respond(role) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

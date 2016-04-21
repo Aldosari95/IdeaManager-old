@@ -13,5 +13,6 @@ class VisitorsController < ApplicationController
     end
 
     @ideas = @ideas.where(platform_id: params[:platform_id]) if params[:platform_id]
+    @roles = Role.all
   end
 end

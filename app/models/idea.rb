@@ -8,12 +8,8 @@ class Idea < ActiveRecord::Base
     self.ideas_users.respond
   end
 
-  def arr_name_respond_designer
-    users.designers.where(id: respond_users.pluck(:user_id)).pluck(:name).join(', ')
-  end
-
-  def arr_name_respond_developer
-    users.developers.where(id: respond_users.pluck(:user_id)).pluck(:name).join(', ')
+  def arr_name_respond(role)
+    users.where(id: respond_users.pluck(:user_id), role_id: role.id).pluck(:name).join(', ')
   end
 
   def user_already_respond?(user_id)

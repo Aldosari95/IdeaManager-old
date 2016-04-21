@@ -15,9 +15,6 @@ class User < ActiveRecord::Base
   validates :admin, default: false
   before_save :ensure_email_is_lowercase
 
-  scope :designers, -> { where role_id: Role.find_by(name: "Designer").id }
-  scope :developers, -> { where role_id: Role.find_by(name: "Developer").id }
-
   def ensure_email_is_lowercase
     email.downcase!
   end
