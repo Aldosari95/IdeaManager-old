@@ -18,6 +18,7 @@ Platform:
         <%= link_to "NEWEST", ideas_path(order: 'newest') %>
         <%= link_to "OLDEST", ideas_path(order: 'oldest') %>
       </th>
+      <th> Owner </th>
       <th>Description</th>
       <th>Required skills</th>
       <th>Additional info</th>
@@ -29,6 +30,7 @@ Platform:
  <% @ideas.each do |idea| %>
       <tr>
         <td><%= idea.name %></td>
+        <td><%= idea.owner.try(:name) %></td>
         <td><%= idea.description %></td>
         <td><%= idea.required_skills %></td>
         <td><%= idea.additional_info %></td>
