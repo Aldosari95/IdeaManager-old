@@ -4,7 +4,7 @@ class Idea < ActiveRecord::Base
   has_many :users, through: :ideas_users
   validates :name, :description, :additional_info, :platform_id, :role_ids, presence: true
 
-  serialize :role_ids, Array
+  serialize :role_ids
 
   def respond_users
     self.ideas_users.respond
