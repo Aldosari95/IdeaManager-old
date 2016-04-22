@@ -2,7 +2,9 @@ class Idea < ActiveRecord::Base
   belongs_to :platform
   has_many :ideas_users
   has_many :users, through: :ideas_users
-  validates :name, :description, :required_skills, :additional_info, :platform_id, presence: true
+  validates :name, :description, :additional_info, :platform_id, :role_ids, presence: true
+
+  serialize :role_ids, Array
 
   def respond_users
     self.ideas_users.respond
@@ -18,6 +20,14 @@ class Idea < ActiveRecord::Base
 
   def owner
     self.ideas_users.owner.try(:first).try(:user)
+  end
+
+  def can_respond?(role_id)
+    self.role_ids.include?(role_id)
+  end
+
+  def arr_name_skill
+    Role.where(id: role_ids).pluck(:name).join(', ')
   end
 end
 

@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy, :respond]
+  before_action :set_roles, only: [:new, :create, :show, :edit, :update]
   before_action :authenticate, only: [:new, :create, :edit, :update, :destroy, :show]
 
   def index
@@ -28,11 +29,11 @@ class IdeasController < ApplicationController
   end
 
   def create
-    @idea = current_user.ideas.create(idea_params)
-    @idea.ideas_users.first.update(action_type: IdeasUser.action_types[:owner])
+    @idea = current_user.ideas.create(idea_params.merge({ role_ids: params[:idea][:role_ids].map{ |v| v.to_i } }))
 
     respond_to do |format|
       if @idea.errors.blank?
+        @idea.ideas_users.first.update(action_type: IdeasUser.action_types[:owner])
         format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
         format.json { render :show, status: :created, location: @idea }
       else
@@ -83,7 +84,11 @@ class IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name, :description, :required_skills, :additional_info, :platform_id)
+      params.require(:idea).permit(:name, :description, :additional_info, :platform_id)
+    end
+
+    def set_roles
+      @roles = Role.all
     end
 
 

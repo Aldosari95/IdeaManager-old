@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418184341) do
+ActiveRecord::Schema.define(version: 20160422141426) do
 
   create_table "ideas", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "required_skills"
     t.string   "additional_info"
     t.integer  "platform_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "role_ids",        default: "--- []\n"
   end
 
   create_table "ideas_users", force: :cascade do |t|

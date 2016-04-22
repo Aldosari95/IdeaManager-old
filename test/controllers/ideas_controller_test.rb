@@ -6,9 +6,9 @@ class IdeasControllerTest < ActionController::TestCase
     @user = users(:admin)
     @idea = @user.ideas.create(name: "MyString",
       description: "Description",
-      required_skills: "Required skills",
       additional_info: "Additional info",
-      platform_id: 1
+      platform_id: 1,
+      role_ids: [1]
     )
     @idea.ideas_users.first.update(action_type: IdeasUser.action_types[:owner])
     session[:user_id] = @user.id

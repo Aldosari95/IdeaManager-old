@@ -20,11 +20,6 @@ class IdeaTest < ActiveSupport::TestCase
 		assert_not @idea.valid?
 	end
 
-	test "required_skills should be present" do
-		@idea.required_skills = ""
-		assert_not @idea.valid?
-	end
-
 	test "additional_info should be present" do
 		@idea.additional_info = ""
 		assert_not @idea.valid?

@@ -13,7 +13,7 @@
 
 <p>
   <strong>Role:</strong>
-  <%= @user.role.name %>
+  <%= @user.try(:role).try(:name) %>
 </p>
 
 <p>

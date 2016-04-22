@@ -32,7 +32,7 @@ Platform:
         <td><%= idea.name %></td>
         <td><%= idea.owner.try(:name) %></td>
         <td><%= idea.description %></td>
-        <td><%= idea.required_skills %></td>
+        <td><%= idea.arr_name_skill %></td>
         <td><%= idea.additional_info %></td>
         <td><%= idea.platform.try(:name) %></td>
         <td><%= link_to 'Show', idea %></td>
