@@ -2,7 +2,6 @@ require 'test_helper'
 
 class IdeasControllerTest < ActionController::TestCase
   setup do
-    # @idea = ideas(:one)
     @user = users(:admin)
     @idea = @user.ideas.create(name: "MyString",
       description: "Description",
@@ -10,7 +9,7 @@ class IdeasControllerTest < ActionController::TestCase
       platform_id: 1,
       role_ids: [1]
     )
-    @idea.ideas_users.first.update(action_type: IdeasUser.action_types[:owner])
+
     session[:user_id] = @user.id
   end
 
@@ -36,7 +35,7 @@ class IdeasControllerTest < ActionController::TestCase
   end
 
   test "should update idea" do
-    patch :update, id: @idea, idea: { name: @idea.name }
+    patch :update, id: @idea, idea: { name: @idea.name, role_ids: [1] }
     assert_redirected_to idea_path(@idea)
   end
 

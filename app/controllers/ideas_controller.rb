@@ -59,7 +59,7 @@ class IdeasController < ApplicationController
 
   def update
     respond_to do |format|
-      if @idea.update(idea_params)
+      if @idea.update(idea_params.merge({ role_ids: params[:idea][:role_ids].map{ |v| v.to_i } }))
         format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
         format.json { render :show, status: :ok, location: @idea }
       else

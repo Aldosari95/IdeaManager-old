@@ -13,17 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20160422141426) do
 
-  create_table "ideas", force: :cascade do |t|
-    t.string   "name"
+  create_table "ideas", force: true do |t|
+    t.string   "name",            limit: nil
     t.text     "description"
-    t.string   "additional_info"
+    t.string   "additional_info", limit: nil
     t.integer  "platform_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.string   "role_ids",        default: "--- []\n"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "role_ids"
   end
 
-  create_table "ideas_users", force: :cascade do |t|
+  create_table "ideas_users", force: true do |t|
     t.integer "user_id"
     t.integer "idea_id"
     t.integer "action_type"
@@ -32,27 +32,27 @@ ActiveRecord::Schema.define(version: 20160422141426) do
   add_index "ideas_users", ["idea_id"], name: "index_ideas_users_on_idea_id"
   add_index "ideas_users", ["user_id"], name: "index_ideas_users_on_user_id"
 
-  create_table "platforms", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "platforms", force: true do |t|
+    t.string   "name",       limit: nil
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "roles", force: true do |t|
+    t.string   "name",       limit: nil
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password"
-    t.string   "password_digest"
+  create_table "users", force: true do |t|
+    t.string   "name",            limit: nil
+    t.string   "email",           limit: nil
+    t.string   "password",        limit: nil
+    t.string   "password_digest", limit: nil
     t.integer  "role_id"
-    t.boolean  "admin",           default: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.boolean  "admin",                       default: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
 end
